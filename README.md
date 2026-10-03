@@ -15,7 +15,7 @@ Studiplan is free and open source. It has no account, no tracking and no paid ve
 charges for AI: it uses the AI you already have.
 
 **Download:** [Studiplan for Windows](https://github.com/vinihu/studiplan-app/releases/latest) ·
-**Website:** https://studiplan-app.vercel.app · **Questions:** [Discord](https://discord.gg/XQ8P5y8gkS)
+**Website:** https://studiplan.app · **Questions:** [Discord](https://discord.gg/XQ8P5y8gkS)
 
 ## What you can make
 

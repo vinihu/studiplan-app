@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A free, open-source desktop app for studying with your own AI: an organised library of subjects and materials, with summaries, quizzes, mock exams and flashcards made and kept next to them.",
   "license": "MIT",
-  "homepage": "https://studiplan-app.vercel.app",
+  "homepage": "https://studiplan.app",
   "repository": { "type": "git", "url": "https://github.com/vinihu/studiplan-app.git" },
   "bugs": { "url": "https://github.com/vinihu/studiplan-app/issues" },
   "private": true,
