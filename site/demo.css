@@ -337,7 +337,7 @@ button.sp-row:hover {
 }
 
 .sp-row--result {
-  grid-template-columns: minmax(0, 1fr) calc(9.5 * var(--u, 1rem)) calc(9.5 * var(--u, 1rem)) calc(9.5 * var(--u, 1rem));
+  grid-template-columns: minmax(0, 1fr) calc(11.5 * var(--u, 1rem)) calc(9.5 * var(--u, 1rem)) calc(9.5 * var(--u, 1rem));
 }
 
 .sp-row--material {
@@ -487,6 +487,46 @@ button.sp-row:hover {
 
 .sp-sizes {
   gap: calc(0.375 * var(--u, 1rem));
+}
+
+/* The kinds stand in groups, each under a quiet label: Read, Learn, Test, Or ask. */
+.sp-kinds {
+  align-items: flex-end;
+  gap: calc(0.75 * var(--u, 1rem)) calc(1.5 * var(--u, 1rem));
+}
+
+.sp-group {
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.375 * var(--u, 1rem));
+}
+
+.sp-group-label {
+  font-size: calc(0.75 * var(--u, 1rem)) !important;
+  font-weight: 500 !important;
+  color: var(--sp-muted) !important;
+}
+
+.sp-group-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(0.5 * var(--u, 1rem));
+}
+
+/* A second line under a result's title: how the practice test was asked for. */
+.sp-name-block {
+  display: block;
+  min-width: 0;
+}
+
+.sp-name-block .sp-name {
+  display: block;
+}
+
+.sp-sub {
+  display: block;
+  font-size: calc(0.75 * var(--u, 1rem));
+  color: var(--sp-muted);
 }
 
 .sp-toggle {
@@ -1180,7 +1220,7 @@ label.sp-option:hover {
 
 @container (max-width: 60rem) {
   .sp-row--result {
-    grid-template-columns: minmax(0, 1fr) calc(9.5 * var(--u, 1rem)) calc(9.5 * var(--u, 1rem));
+    grid-template-columns: minmax(0, 1fr) calc(11.5 * var(--u, 1rem)) calc(9.5 * var(--u, 1rem));
   }
 
   .sp-maker {

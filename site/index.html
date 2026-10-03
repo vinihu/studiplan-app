@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Studiplan: turn your study materials into summaries, flashcards and quizzes with your own AI</title>
-  <meta name="description" content="Studiplan turns your study materials into summaries, flashcards, quizzes and mock exams with your own AI. Free and open source, for Windows.">
+  <title>Studiplan: turn your study materials into summaries, flashcards and practice tests with your own AI</title>
+  <meta name="description" content="Studiplan turns your study materials into summaries, flashcards and practice tests with your own AI. Free and open source, for Windows.">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -31,8 +31,6 @@
     <symbol id="sp-images" viewBox="0 0 24 24"><path d="M18 22H4a2 2 0 0 1-2-2V6"/><path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18"/><circle cx="12" cy="8" r="2"/><rect width="16" height="16" x="6" y="2" rx="2"/></symbol>
     <symbol id="sp-summary" viewBox="0 0 24 24"><path d="M15 12H3"/><path d="M17 18H3"/><path d="M21 6H3"/></symbol>
     <symbol id="sp-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
-    <symbol id="sp-quiz" viewBox="0 0 24 24"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></symbol>
-    <symbol id="sp-exam" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
     <symbol id="sp-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></symbol>
     <symbol id="sp-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
     <symbol id="sp-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
@@ -43,6 +41,9 @@
     <symbol id="sp-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
     <symbol id="sp-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
     <symbol id="sp-folder-pen" viewBox="0 0 24 24"><path d="M2 11.5V5a2 2 0 0 1 2-2h3.9c.7 0 1.3.3 1.7.9l.8 1.2c.4.6 1 .9 1.7.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-9.5"/><path d="M11.378 13.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></symbol>
+    <symbol id="sp-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+    <symbol id="sp-table" viewBox="0 0 24 24"><path d="M15 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M21 9H3"/><path d="M21 15H3"/></symbol>
+    <symbol id="sp-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
     <symbol id="sp-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
   </svg>
 
@@ -58,7 +59,27 @@
         <a href="#install">Install</a>
         <a href="https://discord.gg/XQ8P5y8gkS" target="_blank" rel="noopener noreferrer">Discord</a>
       </nav>
-      <a class="button button--small button--outline" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe">Download</a>
+      <!-- The download, top right: one soft button in two parts. The main part downloads for the system that is
+           chosen; the narrow part opens the menu to choose it. demo.js shows the menu part and, on a Mac,
+           chooses Mac at first. Without the script this is simply the Windows download.
+           MAC: when the Mac version exists, replace each <span> line marked data-platform-show="mac" on this page
+           with a link like the one below (smaller here in the top bar), remove "coming soon" from the menu item,
+           and rewrite the line marked MAC NOTE:
+           <a class="button is-off" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-0.1.0.dmg" data-platform-show="mac">Download for Mac</a>
+      -->
+      <div class="split split--small" data-platform>
+        <div class="platform-stack">
+          <a class="button button--small" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe" data-platform-show="windows">Download</a>
+          <span class="button button--small button--pending is-off" data-platform-show="mac">Mac: coming soon</span>
+        </div>
+        <button type="button" class="split-more" aria-label="Choose your system" aria-haspopup="menu" aria-expanded="false" aria-controls="platform-menu" data-platform-toggle hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"/></svg>
+        </button>
+        <div class="menu" id="platform-menu" role="menu" aria-label="Your system" data-platform-menu hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" tabindex="-1" data-platform-pick="windows"><svg class="icon" aria-hidden="true" focusable="false"><use href="#sp-check"/></svg>Windows</button>
+          <button type="button" role="menuitemradio" aria-checked="false" tabindex="-1" data-platform-pick="mac"><svg class="icon" aria-hidden="true" focusable="false"><use href="#sp-check"/></svg>Mac <span>coming soon</span></button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -67,44 +88,29 @@
       <h1 id="title">
         <!-- Read aloud as one sentence. What is seen is the line below it: one word at a time in the pill,
              or the whole phrase when the visitor has asked for no motion. -->
-        <span class="visually-hidden">Turn your study materials into summaries, quizzes and flashcards.</span>
+        <span class="visually-hidden">Turn your study materials into summaries, flashcards and practice tests.</span>
         <span aria-hidden="true">
           <span class="h1-top">Turn your study materials</span>
-          <span class="keep"><span class="into">into</span> <span class="rotator"><span>summaries</span><span>flashcards</span><span>quizzes</span><span>mock exams</span></span><span class="still">summaries, quizzes and flashcards.</span></span>
+          <span class="keep"><span class="into">into</span> <span class="rotator"><span>summaries</span><span>explanations</span><span>cheat sheets</span><span>flashcards</span><span>practice tests</span></span><span class="still">summaries, flashcards and practice tests.</span></span>
         </span>
       </h1>
       <p class="claim">With your own AI. For free.</p>
       <p class="lede">Studiplan is free and uses the AI you already have: your Claude or ChatGPT subscription (through Claude Code or Codex), a model on your own computer (Ollama), or your own API key.</p>
 
-      <!-- The download: one control in two parts. The main part downloads what it says, and that is always
-           Windows at first, on every device. The narrow part on its right opens a small menu to choose
-           another system; demo.js shows it. Without the script this is simply the Windows download. -->
-      <div class="action" id="platform" data-platform>
-        <div class="split">
-          <div class="platform-stack">
-            <a class="button" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe" data-platform-show="windows">Download for Windows</a>
-            <!-- MAC: when the Mac version exists, replace the <span> line below with this one line (and the real version),
-                 remove "coming soon" from the menu item below, and rewrite the line marked MAC NOTE:
-            <a class="button is-off" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-0.1.0.dmg" data-platform-show="mac">Download for Mac</a>
-            -->
-            <span class="button button--pending is-off" data-platform-show="mac">Mac version: coming soon</span>
-          </div>
-          <button type="button" class="split-more" aria-label="Choose your system" aria-haspopup="menu" aria-expanded="false" aria-controls="platform-menu" data-platform-toggle hidden>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"/></svg>
-          </button>
-          <div class="menu" id="platform-menu" role="menu" aria-label="Your system" data-platform-menu hidden>
-            <button type="button" role="menuitemradio" aria-checked="true" tabindex="-1" data-platform-pick="windows"><svg class="icon" aria-hidden="true" focusable="false"><use href="#sp-check"/></svg>Windows</button>
-            <button type="button" role="menuitemradio" aria-checked="false" tabindex="-1" data-platform-pick="mac"><svg class="icon" aria-hidden="true" focusable="false"><use href="#sp-check"/></svg>Mac <span>coming soon</span></button>
-          </div>
+      <!-- The download in the middle: one plain button. It follows the system chosen in the top bar. -->
+      <div class="action" id="platform">
+        <div class="platform-stack">
+          <a class="button" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe" data-platform-show="windows">Download for Windows</a>
+          <span class="button button--pending is-off" data-platform-show="mac">Mac version: coming soon</span>
         </div>
         <div class="platform-stack">
-          <p class="action-note" data-platform-show="windows">Version 0.1.0 for Windows 10 or later. No account, nothing to pay us.</p>
-          <p class="action-note is-off" data-platform-show="mac">The Mac version is being built and tested. Windows is ready now.</p><!-- MAC NOTE -->
+          <p class="action-note" data-platform-show="windows">Version 0.1.0 runs on Windows 10 or later, and you need no account.</p>
+          <p class="action-note is-off" data-platform-show="mac">The Mac version is being built and tested. <a href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe">Download for Windows instead</a></p><!-- MAC NOTE -->
         </div>
       </div>
 
       <!-- THE DEMO: Studiplan's screens re-created in HTML (demo.css) and wired up by demo.js. Nothing is generated
-           here: the summary, flashcards and quiz are results the app made with Claude Code. Without JavaScript
+           here: the summary, flashcards and practice test are results the app made with Claude Code. Without JavaScript
            this shows the material screen at rest. -->
       <div class="screen">
         <div class="sp" role="region" aria-label="Interactive demo of the Studiplan app" data-sp-demo>
@@ -148,11 +154,32 @@
                     <div class="sp-make" data-sp-make="full">
                       <div data-sp-outcome></div>
                   <div class="sp-kinds" role="group" aria-label="What to make">
-                    <button type="button" class="sp-toggle" data-kind="summary" aria-pressed="true"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-summary"/></svg>Summary</button>
-                    <button type="button" class="sp-toggle" data-kind="flashcards" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-layers"/></svg>Flashcards</button>
-                    <button type="button" class="sp-toggle" data-kind="quiz" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-quiz"/></svg>Quiz</button>
-                    <button type="button" class="sp-toggle" data-kind="exam" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-exam"/></svg>Mock exam</button>
-                    <button type="button" class="sp-toggle" data-kind="custom" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-pen"/></svg>Something else…</button>
+                    <div class="sp-group">
+                      <p class="sp-group-label">Read</p>
+                      <div class="sp-group-row">
+                        <button type="button" class="sp-toggle" data-kind="summary" aria-pressed="true"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-summary"/></svg>Summary</button>
+                        <button type="button" class="sp-toggle" data-kind="explain" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-bulb"/></svg>Explain it</button>
+                        <button type="button" class="sp-toggle" data-kind="cheatsheet" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-table"/></svg>Cheat sheet</button>
+                      </div>
+                    </div>
+                    <div class="sp-group">
+                      <p class="sp-group-label">Learn</p>
+                      <div class="sp-group-row">
+                        <button type="button" class="sp-toggle" data-kind="flashcards" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-layers"/></svg>Flashcards</button>
+                      </div>
+                    </div>
+                    <div class="sp-group">
+                      <p class="sp-group-label">Test</p>
+                      <div class="sp-group-row">
+                        <button type="button" class="sp-toggle" data-kind="test" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-cap"/></svg>Practice test</button>
+                      </div>
+                    </div>
+                    <div class="sp-group">
+                      <p class="sp-group-label">Or ask</p>
+                      <div class="sp-group-row">
+                        <button type="button" class="sp-toggle" data-kind="custom" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-pen"/></svg>Your own request</button>
+                      </div>
+                    </div>
                   </div>
                   <p class="sp-hint" data-sp-hint>The material in short, to read before you practise.</p>
                       <div class="sp-make" data-sp-controls>
@@ -164,6 +191,11 @@
                         <button type="button" class="sp-toggle" aria-pressed="false">Long</button>
                       </div>
                     </div>
+                    <div class="sp-size" data-sp-written hidden>
+                      <p class="sp-size-label">Questions</p>
+                      <div class="sp-sizes" role="group" aria-label="Questions" data-sp-writtens></div>
+                    </div>
+                    <p class="sp-with" data-sp-nosize hidden>As long as your material needs. There is nothing to choose here.</p>
                         <div class="sp-request" data-sp-request hidden>
                           <label for="sp-request">What should it make?</label>
                           <textarea id="sp-request" rows="3" placeholder="A timeline of the events, with one line on why each mattered"></textarea>
@@ -188,7 +220,7 @@
                   <section class="sp-section">
                     <h4 class="sp-section-title">Results <span data-sp-result-count>3 results</span></h4>
                     <ul class="sp-rows" aria-label="Results made from this material" data-sp-results>
-                <li><button type="button" class="sp-row sp-row--result" data-sp-open="quiz"><span class="sp-cell-name"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-quiz"/></svg><span class="sp-name">Quiz: Cell division</span></span><span class="sp-fact">Quiz · 10 questions</span><span class="sp-fact sp-maker">Claude Code · sonnet</span><span class="sp-fact sp-end sp-date" data-day="2 Oct 2026" data-time="19:34">2 Oct 2026, 19:34</span></button></li>
+                <li><button type="button" class="sp-row sp-row--result" data-sp-open="quiz"><span class="sp-cell-name"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-cap"/></svg><span class="sp-name-block"><span class="sp-name">Practice test: Cell division</span><span class="sp-sub">Quick · with written questions</span></span></span><span class="sp-fact">Practice test · 10 questions</span><span class="sp-fact sp-maker">Claude Code · sonnet</span><span class="sp-fact sp-end sp-date" data-day="2 Oct 2026" data-time="19:34">2 Oct 2026, 19:34</span></button></li>
                 <li><button type="button" class="sp-row sp-row--result" data-sp-open="flashcards"><span class="sp-cell-name"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-layers"/></svg><span class="sp-name">Flashcards: Cell division</span></span><span class="sp-fact">Flashcards · 20 cards</span><span class="sp-fact sp-maker">Claude Code · sonnet</span><span class="sp-fact sp-end sp-date" data-day="2 Oct 2026" data-time="19:33">2 Oct 2026, 19:33</span></button></li>
                 <li><button type="button" class="sp-row sp-row--result" data-sp-open="summary"><span class="sp-cell-name"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-summary"/></svg><span class="sp-name">Summary: Cell division</span></span><span class="sp-fact">Summary · Short</span><span class="sp-fact sp-maker">Claude Code · sonnet</span><span class="sp-fact sp-end sp-date" data-day="2 Oct 2026" data-time="19:33">2 Oct 2026, 19:33</span></button></li>
                     </ul>
@@ -269,11 +301,11 @@
               <div class="sp-page" data-sp-view="quiz" hidden>
               <button type="button" class="sp-back" data-sp-back="material"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-left"/></svg><span>Cell division</span></button>
               <div class="sp-header">
-                <h3 class="sp-title" tabindex="-1">Quiz: Cell division</h3>
-                <p class="sp-detail">Quiz · 10 questions · Made 2 Oct 2026 with Claude Code (sonnet)</p>
-                <p class="sp-demo-note">The demo opens this same saved quiz whatever size you chose, and shows 3 of its 10 questions.</p>
+                <h3 class="sp-title" tabindex="-1">Practice test: Cell division</h3>
+                <p class="sp-detail">Practice test · 10 questions · Made 2 Oct 2026 with Claude Code (sonnet)</p>
+                <p class="sp-demo-note">The demo opens this same saved practice test whatever you chose, and shows 3 of its 10 questions.</p>
               </div>
-                <section aria-label="Quiz" data-sp-quiz></section>
+                <section aria-label="Practice test" data-sp-quiz></section>
               </div>
             </div>
           </div>
@@ -296,7 +328,7 @@
           </div>
           <div class="step-text">
             <h3><span class="step-number">1</span>Add your materials</h3>
-            <p>PDFs, PowerPoint files and photos of your notes, sorted by subject.</p>
+            <p>PDFs, PowerPoint files and photos of your notes, sorted by subject. Photos of your notes can be turned into one PDF with a button.</p>
           </div>
         </li>
         <li class="step">
@@ -304,11 +336,32 @@
             <h4 class="sp-section-title">Make</h4>
             <div class="sp-make" data-sp-make="lite">
               <div class="sp-kinds" role="group" aria-label="What to make">
-                <button type="button" class="sp-toggle" data-kind="summary" aria-pressed="true"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-summary"/></svg>Summary</button>
-                <button type="button" class="sp-toggle" data-kind="flashcards" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-layers"/></svg>Flashcards</button>
-                <button type="button" class="sp-toggle" data-kind="quiz" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-quiz"/></svg>Quiz</button>
-                <button type="button" class="sp-toggle" data-kind="exam" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-exam"/></svg>Mock exam</button>
-                <button type="button" class="sp-toggle" data-kind="custom" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-pen"/></svg>Something else…</button>
+                <div class="sp-group">
+                  <p class="sp-group-label">Read</p>
+                  <div class="sp-group-row">
+                    <button type="button" class="sp-toggle" data-kind="summary" aria-pressed="true"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-summary"/></svg>Summary</button>
+                    <button type="button" class="sp-toggle" data-kind="explain" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-bulb"/></svg>Explain it</button>
+                    <button type="button" class="sp-toggle" data-kind="cheatsheet" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-table"/></svg>Cheat sheet</button>
+                  </div>
+                </div>
+                <div class="sp-group">
+                  <p class="sp-group-label">Learn</p>
+                  <div class="sp-group-row">
+                    <button type="button" class="sp-toggle" data-kind="flashcards" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-layers"/></svg>Flashcards</button>
+                  </div>
+                </div>
+                <div class="sp-group">
+                  <p class="sp-group-label">Test</p>
+                  <div class="sp-group-row">
+                    <button type="button" class="sp-toggle" data-kind="test" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-cap"/></svg>Practice test</button>
+                  </div>
+                </div>
+                <div class="sp-group">
+                  <p class="sp-group-label">Or ask</p>
+                  <div class="sp-group-row">
+                    <button type="button" class="sp-toggle" data-kind="custom" aria-pressed="false"><svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#sp-pen"/></svg>Your own request</button>
+                  </div>
+                </div>
               </div>
               <p class="sp-hint" data-sp-hint>The material in short, to read before you practise.</p>
               <div class="sp-size" data-sp-size>
@@ -319,6 +372,11 @@
                   <button type="button" class="sp-toggle" aria-pressed="false">Long</button>
                 </div>
               </div>
+              <div class="sp-size" data-sp-written hidden>
+                <p class="sp-size-label">Questions</p>
+                <div class="sp-sizes" role="group" aria-label="Questions" data-sp-writtens></div>
+              </div>
+              <p class="sp-with" data-sp-nosize hidden>As long as your material needs. There is nothing to choose here.</p>
             </div>
           </div>
           <div class="step-text">
@@ -335,7 +393,7 @@
           </div>
           <div class="step-text">
             <h3><span class="step-number">3</span>Study it</h3>
-            <p>Flip the cards, take the quiz, redo what you missed. Press the card to flip it.</p>
+            <p>Flip the cards, take the practice test and redo what you missed. You can press the card here to flip it.</p>
           </div>
         </li>
       </ol>
@@ -347,7 +405,7 @@
         <div class="features">
           <div class="feature feature--quiz">
             <div class="feature-text">
-              <h3>Quizzes that explain the answer</h3>
+              <h3>Practice tests that explain the answer</h3>
               <p>Right and wrong are marked, with the reason why.</p>
             </div>
             <div class="sp sp-piece">
@@ -378,7 +436,7 @@
               <h3>Your files stay on your computer</h3>
               <p>Ordinary folders you can open, back up or move.</p>
             </div>
-            <ul class="tree" role="img" aria-label="The folders on disk: Documents, Studiplan, then the subject Biology, then the material Cell division. Inside it are material.json, a files folder with the PDF, the PowerPoint file and the photos, and a sets folder with the summary, the flashcards and the quiz.">
+            <ul class="tree" role="img" aria-label="The folders on disk: Documents, Studiplan, then the subject Biology, then the material Cell division. Inside it are material.json, a files folder with the PDF, the PowerPoint file and the photos, and a sets folder with the summary, the flashcards and the practice test.">
               <li><svg class="icon"><use href="#i-folder"/></svg>Documents / Studiplan</li>
               <li class="l1"><svg class="icon"><use href="#i-folder"/></svg>Biology</li>
               <li class="l2"><svg class="icon"><use href="#i-folder"/></svg>Cell division</li>
@@ -390,7 +448,7 @@
               <li class="l3"><svg class="icon"><use href="#i-folder"/></svg>sets</li>
               <li class="l4"><svg class="icon"><use href="#i-file"/></svg>2026-10-02-summary.md</li>
               <li class="l4"><svg class="icon"><use href="#i-file"/></svg>2026-10-02-flashcards.json</li>
-              <li class="l4"><svg class="icon"><use href="#i-file"/></svg>2026-10-02-quiz.json</li>
+              <li class="l4"><svg class="icon"><use href="#i-file"/></svg>2026-10-02-test.json</li>
             </ul>
           </div>
 
@@ -399,7 +457,7 @@
               <svg class="icon feature-icon" aria-hidden="true"><use href="#i-no-account"/></svg>
               <div>
                 <h3>No account</h3>
-                <p>Open it and start. Nothing to sign up for.</p>
+                <p>You open it and start, without signing up for anything.</p>
               </div>
             </li>
             <li>
@@ -413,7 +471,7 @@
               <svg class="icon feature-icon" aria-hidden="true"><use href="#i-code"/></svg>
               <div>
                 <h3>Free and open source</h3>
-                <p>MIT licence. No paid version, nothing to pay us.</p>
+                <p>It is under the MIT licence, and there is no paid version.</p>
               </div>
             </li>
           </ul>
@@ -445,13 +503,13 @@
             <th scope="row">Ollama</th>
             <td data-label="What you need">Installed, with a model. Runs on your own computer.</td>
             <td data-label="What it reads">Text. Photos need a model that can see.</td>
-            <td data-label="Tried for real">Not yet. It is built, but has not run with a real model.</td>
+            <td data-label="Tried for real">Not yet: it is built, but has not run with a real model.</td>
           </tr>
           <tr>
             <th scope="row">Your own API key</th>
             <td data-label="What you need">A key from Anthropic, OpenAI or Google.</td>
             <td data-label="What it reads">Text, photos, and scanned PDFs of up to 20&nbsp;pages.</td>
-            <td data-label="Tried for real">Not yet. It is built, but has not run with a working key.</td>
+            <td data-label="Tried for real">Not yet: it is built, but has not run with a working key.</td>
           </tr>
         </tbody>
       </table>
@@ -463,10 +521,13 @@
       <div class="section wrap closing">
         <div class="closing-action">
           <h2 id="download-title">Get Studiplan</h2>
-          <p class="section-lede">Your materials into study aids, with your own AI, for free.</p>
+          <p class="section-lede">Studiplan turns your materials into summaries, cheat sheets, flashcards and practice tests with your own AI, and it is free.</p>
           <div class="action">
-            <a class="button" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe">Download for Windows</a>
-            <p class="action-note">Version 0.1.0. Windows 10 or later, 64-bit. About 90&nbsp;MB. <a href="#platform">A Mac version is planned.</a></p>
+            <div class="platform-stack platform-stack--start">
+              <a class="button" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe" data-platform-show="windows">Download for Windows</a>
+              <span class="button button--pending is-off" data-platform-show="mac">Mac version: coming soon</span>
+            </div>
+            <p class="action-note">Version 0.1.0 is for 64-bit Windows 10 or later and is about 90&nbsp;MB. A Mac version is planned.</p>
           </div>
         </div>
 
@@ -486,7 +547,7 @@
           <pre class="code"><code>Get-FileHash .\Studiplan-Setup-0.1.0.exe -Algorithm SHA256</code></pre>
           <p>The result must be exactly this:</p>
           <!-- RELEASE: replace the token on the next line with the real SHA-256 of the released installer (64 characters). It appears only here. -->
-          <pre class="code"><code>SHA256-OF-THE-RELEASED-INSTALLER</code></pre>
+          <pre class="code"><code>A92A6E67602CD935C6AB334D6A3BF573FEFDFFBA726E219F45D04E166FD6DF0D</code></pre>
         </div>
       </div>
     </section>

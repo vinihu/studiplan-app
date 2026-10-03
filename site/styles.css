@@ -187,19 +187,6 @@ a.button:focus-visible {
   border-radius: var(--radius);
 }
 
-/* The quiet one in the top bar: the page has one bright action, and it is in the hero. */
-.button--outline {
-  border-color: var(--line-strong);
-  background: var(--white);
-  color: var(--black);
-}
-
-a.button--outline:hover {
-  border-color: var(--black);
-  background: var(--white);
-  color: var(--black);
-}
-
 /* Not a link, and it must not look like one. */
 .button--pending {
   border-color: var(--line-strong);
@@ -246,13 +233,39 @@ a.button--outline:hover {
   place-items: center;
   width: 3.125rem;
   padding: 0;
+  position: relative;
   border: 1px solid var(--blue);
-  border-left-color: var(--blue-dark);
+  border-left: 0;
   border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--blue);
   color: var(--white);
   cursor: pointer;
   transition: background-color 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+/* Where the two parts meet: a short, faint line that stops before the edges, not a hard divide. */
+.split-more::before {
+  content: "";
+  position: absolute;
+  top: 26%;
+  bottom: 26%;
+  left: 0;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.28;
+}
+
+.split--small .split-more {
+  width: 2.125rem;
+}
+
+.split--small .split-more .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.platform-stack--start {
+  justify-items: start;
 }
 
 .split-more[hidden] {
@@ -1119,8 +1132,27 @@ h3 {
     display: none;
   }
 
-  .top .button {
+  .top .split,
+  .top-row > .button {
     margin-left: auto;
+  }
+
+  .platform-stack--start {
+    justify-items: stretch;
+  }
+
+  /* Fingers need room: the top-bar download and its menu part are 40px tall here. */
+  .top .button {
+    display: grid;
+    align-items: center;
+    min-height: 2.5rem;
+  }
+
+  .split--small .split-more {
+    width: 2.5rem;
+  }
+
+  .top .button {
     padding-inline: 0.625rem;
     font-size: 0.8125rem;
     white-space: nowrap;
@@ -1138,14 +1170,6 @@ h3 {
     justify-items: stretch;
   }
 
-  .split {
-    display: flex;
-  }
-
-  .split > .platform-stack {
-    flex: 1;
-    min-width: 0;
-  }
 
   .action .button {
     display: block;

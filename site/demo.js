@@ -52,15 +52,19 @@
     }
   ];
 
-  /* The Make section's words, as in the app (src/renderer/src/lib/make.ts). */
+  /* The Make section's words, as in the app (src/renderer/src/lib/make.ts). `first` is the size the
+     app chooses at first; `view` is the screen of the demo a result of that kind opens. */
   var KINDS = {
-    summary: { action: "Make summary", sentence: "a summary", sizeLabel: "Length", sizes: ["Short", "Medium", "Long"], hint: "The material in short, to read before you practise.", title: "Summary: Cell division", row: "Summary" },
-    flashcards: { action: "Make flashcards", sentence: "flashcards", sizeLabel: "Size", sizes: ["10 cards", "20 cards", "40 cards"], hint: "Cards with a question on the front and the answer on the back.", title: "Flashcards: Cell division", row: "Flashcards" },
-    quiz: { action: "Make quiz", sentence: "a quiz", sizeLabel: "Size", sizes: ["5 questions", "10 questions", "20 questions"], hint: "A quick check, mostly multiple choice, with explanations.", title: "Quiz: Cell division", row: "Quiz" },
-    exam: { action: "Make mock exam", sentence: "a mock exam", sizeLabel: "Size", sizes: ["10 questions", "20 questions", "30 questions"], hint: "A longer paper with written questions and points, like the real thing.", missing: "This demo has no saved mock exam to show, so there is nothing to make here." },
-    custom: { action: "Make it", sentence: "what you asked for", sizeLabel: "", sizes: [], hint: "Anything else from this material: a timeline, a list of formulas, an explanation of one part.", missing: "This demo cannot make something new: nothing runs in your browser." }
+    summary: { action: "Make summary", sentence: "a summary", sizeLabel: "Length", sizes: ["Short", "Medium", "Long"], first: 1, hint: "The material in short, to read before you practise.", title: "Summary: Cell division", row: "Summary", view: "summary" },
+    explain: { action: "Make explanation", sentence: "an explanation", sizeLabel: "", sizes: [], hint: "A walkthrough in plain words, for when you missed the lesson.", missing: "This demo has no saved explanation to show, so there is nothing to make here." },
+    cheatsheet: { action: "Make cheat sheet", sentence: "a cheat sheet", sizeLabel: "", sizes: [], hint: "One page of key terms, formulas and must-knows.", missing: "This demo has no saved cheat sheet to show, so there is nothing to make here." },
+    flashcards: { action: "Make flashcards", sentence: "flashcards", sizeLabel: "Size", sizes: ["10 cards", "20 cards", "40 cards"], first: 1, hint: "Cards with a question on the front and the answer on the back.", title: "Flashcards: Cell division", row: "Flashcards", view: "flashcards" },
+    test: { action: "Make practice test", sentence: "a practice test", sizeLabel: "Length", sizes: ["Quick \u00b7 about 10 questions", "Standard \u00b7 about 20", "Full exam \u00b7 about 30"], first: 1, hint: "Questions like in an exam, marked with explanations.", title: "Practice test: Cell division", row: "Practice test", view: "quiz" },
+    custom: { action: "Make it", sentence: "what you asked for", sizeLabel: "", sizes: [], hint: "Anything else from this material: a timeline, a comparison, one part explained.", missing: "This demo cannot make something new: nothing runs in your browser." }
   };
-  var KIND_ICONS = { summary: "summary", flashcards: "layers", quiz: "quiz", exam: "exam", custom: "pen" };
+  var KIND_ICONS = { summary: "summary", explain: "bulb", cheatsheet: "table", flashcards: "layers", test: "cap", custom: "pen" };
+  var TEST_LENGTHS = [["Quick", 10], ["Standard", 20], ["Full exam", 30]];
+  var WRITTEN = ["With written questions", "Multiple choice only"];
   var STEPS = ["Reading the files…", "Asking Claude Code…", "Checking the answer…", "Saving…"];
   var STEP_MS = 700;
 
@@ -141,16 +145,31 @@
     var sizeRow = root.querySelector("[data-sp-size]");
     var sizeLabel = root.querySelector("[data-sp-size-label]");
     var sizes = root.querySelector("[data-sp-sizes]");
+    var writtenRow = root.querySelector("[data-sp-written]");
+    var writtens = root.querySelector("[data-sp-writtens]");
+    var noSize = root.querySelector("[data-sp-nosize]");
     var request = root.querySelector("[data-sp-request]");
     var controls = root.querySelector("[data-sp-controls]");
     var go = root.querySelector("[data-sp-go]");
     var withLine = root.querySelector("[data-sp-with]");
     var progress = root.querySelector("[data-sp-progress]");
     var outcome = root.querySelector("[data-sp-outcome]");
-    var state = { kind: "summary", sizes: {}, running: false, timers: [] };
+    var state = { kind: "summary", sizes: {}, written: 0, running: false, timers: [] };
 
     function chosenSize(kind) {
-      return state.sizes[kind] !== undefined ? state.sizes[kind] : 1;
+      return state.sizes[kind] !== undefined ? state.sizes[kind] : KINDS[kind].first;
+    }
+
+    /* What the row of a new result says: what was asked for. */
+    function described(kind) {
+      var size = chosenSize(kind);
+      if (kind === "test") {
+        return {
+          fact: "Practice test \u00b7 " + TEST_LENGTHS[size][1] + " questions",
+          detail: TEST_LENGTHS[size][0] + " \u00b7 " + WRITTEN[state.written].toLowerCase()
+        };
+      }
+      return { fact: KINDS[kind].row + " \u00b7 " + KINDS[kind].sizes[size], detail: null };
     }
 
     function render() {
@@ -172,6 +191,19 @@
           sizes.children[index].focus();
         });
         sizes.appendChild(choice);
+      });
+      noSize.hidden = !(kind.sizes.length === 0 && state.kind !== "custom");
+      writtenRow.hidden = state.kind !== "test";
+      clear(writtens);
+      WRITTEN.forEach(function (label, index) {
+        var choice = button("sp-toggle", label);
+        choice.setAttribute("aria-pressed", String(index === state.written));
+        choice.addEventListener("click", function () {
+          state.written = index;
+          render();
+          writtens.children[index].focus();
+        });
+        writtens.appendChild(choice);
       });
       if (request) request.hidden = state.kind !== "custom";
       if (full) {
@@ -228,8 +260,8 @@
 
     function finish(kindId) {
       stop();
-      hooks.made(kindId, KINDS[kindId].sizes[chosenSize(kindId)]);
-      notice("“" + KINDS[kindId].title + "” is saved in Results", kindId);
+      hooks.made(kindId, described(kindId));
+      notice("“" + KINDS[kindId].title + "” is saved in Results", KINDS[kindId].view);
     }
 
     function start() {
@@ -675,19 +707,26 @@
       dismissed: function () {
         Array.prototype.forEach.call(results.querySelectorAll(".sp-new"), function (mark) { mark.remove(); });
       },
-      made: function (kind, size) {
+      made: function (kind, said) {
         var item = el("li");
         var row = el("button", "sp-row sp-row--result");
         row.type = "button";
-        row.setAttribute("data-sp-open", kind);
+        row.setAttribute("data-sp-open", KINDS[kind].view);
         var name = el("span", "sp-cell-name");
         name.appendChild(icon(KIND_ICONS[kind]));
         var title = el("span", "sp-name", KINDS[kind].title);
         title.appendChild(el("span", "sp-new", "New"));
-        name.appendChild(title);
+        if (said.detail) {
+          var block = el("span", "sp-name-block");
+          block.appendChild(title);
+          block.appendChild(el("span", "sp-sub", said.detail));
+          name.appendChild(block);
+        } else {
+          name.appendChild(title);
+        }
         row.appendChild(name);
         /* The row says what was asked for. What opens is the one saved result, and its screen says so. */
-        row.appendChild(el("span", "sp-fact", KINDS[kind].row + " \u00b7 " + size));
+        row.appendChild(el("span", "sp-fact", said.fact));
         row.appendChild(el("span", "sp-fact sp-maker", "Claude Code · sonnet"));
         var now = new Date();
         var date = el("span", "sp-fact sp-end sp-date");
@@ -834,14 +873,23 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-sp-make="lite"]'), function (root) { setUpMake(root, null); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-sp-flip]"), setUpFlip);
 
-  /* ── Windows or Mac: the menu on the download button ─────────────────────────────────────── */
+  /* ── Windows or Mac: the menu on the download button in the top bar ──────────────────────── */
 
-  /* Windows is what shows first on every device; nothing is detected. Choosing only makes one
-     button and one note visible and the others invisible, so nothing on the page moves. */
-  Array.prototype.forEach.call(document.querySelectorAll("[data-platform]"), function (root) {
-    var split = root.querySelector(".split");
-    var toggle = root.querySelector("[data-platform-toggle]");
-    var menu = root.querySelector("[data-platform-menu]");
+  /* The page offers Windows unless the visitor is on a Mac; phones, tablets and anything unknown
+     count as Windows. What the visitor chooses in the menu always wins. Choosing only makes one
+     button and one note visible and the others invisible, everywhere on the page, so nothing moves. */
+  function onMac() {
+    var named = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+    var agent = navigator.userAgent || "";
+    if (/iphone|ipad|ipod|android/i.test(agent)) return false;
+    /* An iPad says it is a Mac; a Mac has no touch screen. */
+    if (navigator.maxTouchPoints > 1) return false;
+    return /mac/i.test(named) || /macintosh|mac os x/i.test(agent);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-platform]"), function (split) {
+    var toggle = split.querySelector("[data-platform-toggle]");
+    var menu = split.querySelector("[data-platform-menu]");
     var items = Array.prototype.slice.call(menu.querySelectorAll("[data-platform-pick]"));
 
     function isOpen() {
@@ -862,14 +910,12 @@
       if (returnFocus) toggle.focus({ preventScroll: true });
     }
 
-    function choose(item) {
-      var chosen = item.getAttribute("data-platform-pick");
-      items.forEach(function (other) { other.setAttribute("aria-checked", String(other === item)); });
-      Array.prototype.forEach.call(root.querySelectorAll("[data-platform-show]"), function (shown) {
+    function choose(chosen) {
+      items.forEach(function (item) { item.setAttribute("aria-checked", String(item.getAttribute("data-platform-pick") === chosen)); });
+      Array.prototype.forEach.call(document.querySelectorAll("[data-platform-show]"), function (shown) {
         shown.classList.toggle("is-off", shown.getAttribute("data-platform-show") !== chosen);
       });
       split.setAttribute("data-chosen", chosen);
-      close(true);
     }
 
     toggle.addEventListener("click", function () {
@@ -881,7 +927,10 @@
       open(event.key === "ArrowUp" ? items.length - 1 : undefined);
     });
     items.forEach(function (item, index) {
-      item.addEventListener("click", function () { choose(item); });
+      item.addEventListener("click", function () {
+        choose(item.getAttribute("data-platform-pick"));
+        close(true);
+      });
       item.addEventListener("keydown", function (event) {
         var to = null;
         if (event.key === "ArrowDown") to = (index + 1) % items.length;
@@ -904,7 +953,7 @@
     });
 
     split.classList.add("split--live");
-    split.setAttribute("data-chosen", "windows");
+    choose(onMac() ? "mac" : "windows");
     toggle.hidden = false;
   });
 
