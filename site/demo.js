@@ -896,9 +896,11 @@
       return !menu.hidden;
     }
 
-    function open(focusIndex) {
+    function open(focusIndex, quietly) {
       menu.hidden = false;
       toggle.setAttribute("aria-expanded", "true");
+      /* Opened by the pointer resting on the button: show it, but leave the focus where it is. */
+      if (quietly) return;
       var checked = items.filter(function (item) { return item.getAttribute("aria-checked") === "true"; })[0];
       (focusIndex === undefined ? checked || items[0] : items[focusIndex]).focus({ preventScroll: true });
     }
@@ -928,6 +930,8 @@
     });
     items.forEach(function (item, index) {
       item.addEventListener("click", function () {
+        /* A system with no version yet is listed but cannot be chosen. */
+        if (item.getAttribute("aria-disabled") === "true") return;
         choose(item.getAttribute("data-platform-pick"));
         close(true);
       });
@@ -951,6 +955,19 @@
     split.addEventListener("focusout", function (event) {
       if (isOpen() && event.relatedTarget && !split.contains(event.relatedTarget)) close(false);
     });
+
+    /* With a mouse, resting on the button opens the menu and leaving closes it, after a moment
+       so the pointer can cross the small gap between the button and the menu. */
+    if (window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      var leaving = null;
+      split.addEventListener("mouseenter", function () {
+        if (leaving) { clearTimeout(leaving); leaving = null; }
+        if (!isOpen()) open(undefined, true);
+      });
+      split.addEventListener("mouseleave", function () {
+        leaving = setTimeout(function () { leaving = null; close(false); }, 220);
+      });
+    }
 
     split.classList.add("split--live");
     choose(onMac() ? "mac" : "windows");
