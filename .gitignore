@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+
+# build output (electron-vite)
+out/
+
+# installer output (electron-builder)
+dist/
+release/
+
+# smoke-test screenshots and other run artefacts
+artifacts/
+
+# tooling caches
+*.tsbuildinfo
+.eslintcache
+.vite/
+coverage/
+
+# logs and OS noise
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# local environment, never committed
+.env
+.env.*
+
+# generated at build time by scripts/make-notices.mjs
+build/THIRD-PARTY-NOTICES.txt

@@ -1,0 +1,157 @@
+/*
+ * Studiplan theme — the one place the look is defined.
+ *
+ * White surface, near-black text, icons and hairline borders, one blue accent.
+ * Components never set their own colours; they use HeroUI's semantic tokens
+ * (background, foreground, accent, muted, border, danger, success), which get their values here.
+ *
+ * Rules this file encodes:
+ *   - Blue (`--accent`) means "act here" or "you are here": the primary button, the selected
+ *     item, focus rings, links, progress. Nothing else is blue.
+ *   - Greys are neutral steps between white and black (no tint).
+ *   - Red (`--danger`) is for destructive actions and errors, green (`--success`) for a
+ *     correct answer. Neither is decoration.
+ *   - Hairline borders instead of shadows, one small radius, one type family.
+ *
+ * Contrast (WCAG 2.x, AA needs 4.5:1 for text). Checked by theme.test.ts on every test run:
+ *   foreground #111111 on white ............ 18.88:1
+ *   accent     #1d4ed8 on white ............  6.70:1   (blue text, links, focus ring)
+ *   white on accent #1d4ed8 ................  6.70:1   (label of the primary button)
+ *   muted      #5c5c5c on white ............  6.69:1   (secondary text)
+ *   white on danger #c81e1e ................  5.74:1
+ *   white on success #15803d ...............  5.02:1
+ *
+ * Light theme only. A dark theme, if it is ever built, is the same three colours inverted and
+ * belongs in this file as a second block.
+ */
+
+/*
+ * One type family: Inter, the neutral face the website uses too. It ships inside the app
+ * (assets/fonts, with its licence, OFL.txt) and is never fetched from the network. Both files are
+ * variable fonts: every weight from 100 to 900 is drawn by the font itself, never faked, and the
+ * optical-size axis lets large headings tighten on their own.
+ * Inter covers Latin, Latin Extended, Vietnamese, Cyrillic and Greek. Anything else a student
+ * writes (Chinese, Arabic, Hebrew, …) falls through to the system's fonts after it in the stack.
+ * The system fonts come after Inter, so the app looks the same on every computer.
+ *
+ * Weights are Tailwind's own and need no remapping for Inter: 400 for running text, 500
+ * (`font-medium`) for what is named or pressed (row titles, labels, buttons), 600
+ * (`font-semibold`) for headings. Inter's ordinary digits differ in width; wherever numbers sit
+ * in a column or change in place, components ask for `tabular-nums`, which Inter provides.
+ */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-Italic-Variable.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans:
+    "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+/*
+ * One small radius. HeroUI derives a whole scale (xs … 4xl) from --radius and gives buttons,
+ * cards and fields different steps of it; flattening the scale makes every corner the same.
+ */
+@theme inline {
+  --radius-xs: calc(var(--radius) * 0.5);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
+}
+
+@layer theme {
+  :root {
+    color-scheme: light;
+
+    /* Primitives. HeroUI's defaults carry a slight violet tint; these are neutral. */
+    --white: #ffffff;
+    --black: #000000;
+    --snow: #ffffff;
+    --eclipse: #111111;
+
+    /* Shape */
+    --radius: 0.375rem;
+    --field-radius: var(--radius);
+    --border-width: 1px;
+    --field-border-width: 1px;
+
+    /* White surface, near-black text */
+    --background: #ffffff;
+    --foreground: #111111;
+
+    --surface: #ffffff;
+    --surface-foreground: var(--foreground);
+    --surface-secondary: #f6f6f6;
+    --surface-secondary-foreground: var(--foreground);
+    --surface-tertiary: #efefef;
+    --surface-tertiary-foreground: var(--foreground);
+
+    --overlay: #ffffff;
+    --overlay-foreground: var(--foreground);
+    /* Behind a dialog the screen steps back but stays readable: the text colour, thinned out. */
+    --backdrop: color-mix(in oklab, var(--foreground) 28%, transparent);
+
+    /* Neutral greys */
+    --muted: #5c5c5c;
+    --default: #f0f0f0;
+    --default-foreground: var(--foreground);
+    --segment: #ffffff;
+    --segment-foreground: var(--foreground);
+
+    /* The one accent */
+    --accent: #1d4ed8;
+    --accent-foreground: #ffffff;
+    --focus: var(--accent);
+    --link: var(--accent);
+
+    /* Meaning, never decoration */
+    --danger: #c81e1e;
+    --danger-foreground: #ffffff;
+    --success: #15803d;
+    --success-foreground: #ffffff;
+    --warning-foreground: var(--foreground);
+
+    /* Hairlines: the text colour, thinned out over the surface */
+    --border: color-mix(in oklab, var(--foreground) 20%, var(--background));
+    --separator: color-mix(in oklab, var(--foreground) 12%, var(--background));
+
+    /* Form fields: white with a hairline border */
+    --field-background: #ffffff;
+    --field-foreground: var(--foreground);
+    --field-placeholder: var(--muted);
+    --field-border: var(--border);
+
+    /* No shadows. Where HeroUI would cast one, draw a hairline instead. */
+    --surface-shadow: 0 0 0 1px var(--border);
+    --overlay-shadow: 0 0 0 1px var(--border);
+    --field-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/*
+ * A radio is round. HeroUI draws it with the large step of the radius scale, which the
+ * flattening above turns into the same small radius as everything else: a rounded square that
+ * reads as a checkbox. Unlayered, so it holds wherever a radio is used.
+ */
+.radio__control,
+.radio__indicator,
+.radio__indicator::before {
+  border-radius: 9999px;
+}

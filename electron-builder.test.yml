@@ -1,0 +1,21 @@
+# The test build (`npm run dist:test`): the app packed exactly like the release, from a bundle
+# that has the development hooks on (src/main/build.ts), so `npm run smoke:packaged` can drive it
+# with Playwright in a throwaway profile and library. It is never published and never installed.
+#
+# What differs from electron-builder.yml, which this file extends:
+#  - its own name, executable ("Studiplan Test.exe"), app id and profile folder, so it cannot be
+#    mistaken for the app or touch its data;
+#  - its own output folder, and only ever a plain folder (`--dir`): scripts/require-notices.mjs
+#    refuses to make an installer from a test build, and refuses this configuration for a
+#    release bundle;
+#  - the one fuse a debugger needs (--inspect) stays on (scripts/after-pack.mjs). The rest are
+#    as released.
+extends: ./electron-builder.yml
+
+appId: vinihu.studiplan.test
+productName: Studiplan Test
+
+directories:
+  # Inside artifacts/, which git and ESLint already ignore.
+  output: artifacts/test-build
+  buildResources: build

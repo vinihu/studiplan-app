@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy: Studiplan</title>
+  <meta name="description" content="What Studiplan and its website do with your data: the app has no account, no tracking and no server, and your files stay on your computer.">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="fonts/inter-latin-opsz-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <a class="name" href="index.html">
+        <img class="mark" src="logo-small.svg" alt="" width="35" height="30">
+        Studiplan
+      </a>
+      <nav class="top-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a href="https://discord.gg/XQ8P5y8gkS" target="_blank" rel="noopener noreferrer">Discord</a>
+      </nav>
+      <a class="button button--small button--outline" href="https://github.com/vinihu/studiplan-app/releases/download/v0.1.0/Studiplan-Setup-0.1.0.exe">Download</a>
+    </div>
+  </header>
+
+  <main class="wrap doc">
+    <h1>Privacy</h1>
+    <p class="doc-lede">Studiplan has no account, no tracking and no server of its own. This page says plainly what the app and this website do with your data.</p>
+
+    <h2>The app</h2>
+    <ul>
+      <li><strong>Nothing goes to the makers of Studiplan.</strong> There is no account, no tracking and no analytics, and there is no Studiplan server to send anything to.</li>
+      <li><strong>Your files stay on your computer.</strong> Your materials, the results made from them and your settings are ordinary files in a folder you choose.</li>
+      <li><strong>When you press a Make button, your material goes to the AI you chose.</strong> Its text and photos are sent to Claude Code, Codex, the provider of your API key (Anthropic, OpenAI or Google), or Ollama on your own computer. What happens to it there is governed by that company’s own terms and privacy policy, not by Studiplan.</li>
+      <li><strong>API keys</strong> are stored encrypted on your computer by the operating system, and are sent only to the provider they belong to.</li>
+      <li><strong>No other connections.</strong> As of this release the app’s window is blocked from all web requests. The only connections going out are the AI requests you start, and whatever the AI tools you have installed do themselves.</li>
+    </ul>
+
+    <h2>This website</h2>
+    <ul>
+      <li>No cookies, no analytics, and no scripts from other websites.</li>
+      <li>It is hosted by Vercel. Like any web host, Vercel processes visitors’ IP addresses and request logs in order to deliver the page. See <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel’s privacy policy</a>.</li>
+      <li>The download is served by GitHub. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub’s privacy statement</a>.</li>
+      <li>The Discord link leads to Discord, which has its own privacy policy.</li>
+    </ul>
+
+    <h2>Students and children</h2>
+    <p>Nothing is collected, so there is nothing to consent to. There is no sign-up.</p>
+
+    <h2>Contact</h2>
+    <!-- CONTACT: if an email address is set up later, it goes in this paragraph. -->
+    <p>Questions about this page: open an issue on the project’s <a href="https://github.com/vinihu/studiplan-app/issues" target="_blank" rel="noopener noreferrer">GitHub issues page</a>, or ask on the <a href="https://discord.gg/XQ8P5y8gkS" target="_blank" rel="noopener noreferrer">Discord server</a>.</p>
+
+    <p class="doc-date">Last updated: 3 October 2026.</p>
+  </main>
+
+  <footer class="wrap">
+    <div class="bottom">
+      <p>Made by vinihu. Free and open source under the MIT licence. The Studiplan name and logo are not part of that licence.</p>
+      <p class="bottom-links">
+        <a href="https://github.com/vinihu/studiplan-app" target="_blank" rel="noopener noreferrer">Source code on GitHub</a>
+        <a href="https://github.com/vinihu/studiplan-app/issues" target="_blank" rel="noopener noreferrer">Report a problem</a>
+        <a href="https://discord.gg/XQ8P5y8gkS" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a href="index.html">Home</a>
+      </p>
+      <p>This page loads nothing from other websites: its font is stored here, and there is no script and no tracking.</p>
+    </div>
+  </footer>
+</body>
+</html>

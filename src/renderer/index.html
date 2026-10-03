@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Strict by default: nothing loads from the network, no inline or evaluated script,
+      no plugins, no form posts. Widen a directive only for a concrete need.
+
+      Styles: only the app's own stylesheet, plus <style> tags carrying the nonce below.
+      React Aria (underneath HeroUI) adds one small <style> tag at runtime and reads the
+      nonce for it from the csp-nonce meta tag. The nonce is a fixed value in a local file,
+      so it is not a secret: it keeps stray inline styles out, it is not a defence on its own.
+    -->
+    <meta name="csp-nonce" content="studiplan-style" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'nonce-studiplan-style'; img-src 'self' data: studiplan-file:; frame-src studiplan-file:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Studiplan</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+# The Windows installer (`npm run dist`). Options: https://www.electron.build/configuration
+#
+# What it makes: release/Studiplan-Setup-<version>.exe, an NSIS installer for 64-bit Windows,
+# and release/win-unpacked/, the same app as a plain folder (what `npm run smoke:packaged` runs).
+#
+# Not configured on purpose: code signing and auto-update. The installer is unsigned, so Windows
+# SmartScreen warns the first time it is run; the download page says so.
+
+# Identifies the app to Windows (taskbar grouping, the shortcut) and seeds the installer's
+# upgrade/uninstall id. Keep it: changing it makes a new version install next to the old one
+# instead of replacing it. `src/main/index.ts` sets the same id at runtime.
+appId: vinihu.studiplan
+productName: Studiplan
+copyright: Copyright © 2026 vinihu
+
+directories:
+  output: release
+  # Icons and installer scripts. Nothing in here is packed into the app.
+  buildResources: build
+
+# Only what the app runs: the electron-vite build and the licence. package.json and the
+# production dependencies (the two modules the main process loads at runtime: unpdf, jszip)
+# are added by electron-builder itself. Everything the window uses is already bundled into
+# out/renderer, which is why those packages are devDependencies.
+files:
+  - out/**
+  - LICENSE
+
+# Licence texts a user can open, in the program folder next to Electron's own
+# (LICENSE.electron.txt, LICENSES.chromium.html). They are not put into resources/, which holds
+# app.asar and nothing else.
+#  - THIRD-PARTY-NOTICES.txt names every bundled package with its licence text. It is generated
+#    by `npm run notices` (scripts/make-notices.mjs), which `npm run dist` runs first; it is not
+#    in the repository. scripts/require-notices.mjs stops the build when it is missing, and
+#    when the bundle in out/ is not a release build (see electron-builder.test.yml).
+#  - The Inter font files in the window are under the SIL Open Font License, which has to travel
+#    with them.
+extraFiles:
+  - from: LICENSE
+    to: LICENSE.txt
+  - from: build/THIRD-PARTY-NOTICES.txt
+    to: THIRD-PARTY-NOTICES.txt
+  - from: src/renderer/src/assets/fonts/OFL.txt
+    to: LICENSE.Inter-font.txt
+beforePack: ./scripts/require-notices.mjs
+
+# Sets Electron's fuses in the packed Studiplan.exe: no ELECTRON_RUN_AS_NODE, no NODE_OPTIONS, no
+# --inspect, code only from app.asar, and app.asar checked against the checksum in the .exe.
+# The list and the reasons are in scripts/after-pack.mjs. `npm run verify:release` reads them back.
+afterPack: ./scripts/after-pack.mjs
+
+asar: true
+# There are no native modules to rebuild.
+npmRebuild: false
+# The app is in English; Chromium's other 50-odd locale files are left out (about 40 MB installed).
+electronLanguages:
+  - en-US
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+
+nsis:
+  # One click, for the current user only: installs into the user's own programs folder
+  # (%LOCALAPPDATA%\Programs\Studiplan), needs no administrator rights and asks no questions.
+  oneClick: true
+  perMachine: false
+  artifactName: Studiplan-Setup-${version}.${ext}
+  shortcutName: Studiplan
+  createStartMenuShortcut: true
+  createDesktopShortcut: true
+  runAfterFinish: true
+  uninstallDisplayName: Studiplan
+  # Uninstalling removes the program. It leaves the settings in %APPDATA%\Studiplan, and it never
+  # goes near the library (Documents\Studiplan or wherever the user put it).
+  deleteAppDataOnUninstall: false
+  # Both exist for things this installer does not do: installing for all users, and updates
+  # that download only what changed.
+  packElevateHelper: false
+  differentialPackage: false
+  include: build/installer.nsh
+
+# No `publish`: nothing is uploaded and the app does not look for updates.
+publish: null

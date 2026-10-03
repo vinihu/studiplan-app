@@ -1,0 +1,107 @@
+/*
+ * Stylesheet entry. Order matters: Tailwind first, then HeroUI, then the app's theme.
+ * Colours, radius, borders and type are set in ./theme/theme.css and nowhere else.
+ */
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "./theme/theme.css";
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Selected text is "you are here" too: the accent, thinned out. */
+  ::selection {
+    background-color: var(--accent-soft);
+    color: var(--foreground);
+  }
+}
+
+/*
+ * The size of everything. Every measure in the app is in rem (Tailwind's and HeroUI's are), so
+ * this one number scales type, controls and spacing together: 18px instead of the browser's 16.
+ */
+@layer base {
+  html {
+    font-size: 112.5%;
+  }
+}
+
+/*
+ * The window's title bar is part of the app (see src/main/window.ts). Where the system draws
+ * its buttons over the page, it tells the page where the free part of that bar is:
+ *   Windows  free from the left edge up to the buttons on the right
+ *   macOS    free from right of the traffic lights to the right edge
+ *   Linux    the system's own title bar is kept; none of this is set, and every reserve is 0
+ */
+@layer base {
+  :root {
+    /* How tall the bar is; 0 where the system draws its own. */
+    --titlebar-height: env(titlebar-area-height, 0px);
+    /* Space above a screen's content. The strip above the screen already gives most of it. */
+    --screen-top: max(0.75rem, calc(2.25rem - var(--titlebar-height)));
+    /* The sidebar's head: under the traffic lights where they sit on its left (macOS), otherwise at its usual place. */
+    --sidebar-top: max(1.25rem, min(var(--titlebar-height), calc(env(titlebar-area-x, 0px) * 100)));
+  }
+}
+
+/* An area that moves the window when dragged, and maximises it on a double click. */
+.app-drag {
+  -webkit-app-region: drag;
+}
+
+/*
+ * What opens over the page (dialogs with their backdrops, menus, lists) is never part
+ * of the title bar, even where it lies over it: a press there belongs to it.
+ */
+[data-slot$="backdrop"],
+[data-slot$="popover"] {
+  -webkit-app-region: no-drag;
+}
+
+/* The window never scrolls as a whole: the sidebar stays put and each screen scrolls itself. */
+@layer base {
+  body {
+    overflow: hidden;
+  }
+}
+
+/*
+ * One motion for "the pointer is over something that acts": the background changes over the
+ * 100ms HeroUI gives its buttons. Its list items, menu items and table rows change at once out
+ * of the box, which makes a row snap next to a button that fades. Only timing is set here, no
+ * colour. HeroUI switches its own transitions off for people who ask for less motion; so do these.
+ */
+@layer components {
+  .list-box-item,
+  .menu-item {
+    transition:
+      transform 250ms var(--ease-out-quart),
+      background-color 100ms var(--ease-out),
+      box-shadow 150ms var(--ease-out);
+  }
+
+  .table__cell {
+    transition: background-color 100ms var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .list-box-item,
+    .menu-item,
+    .table__cell {
+      transition: none;
+    }
+  }
+}
