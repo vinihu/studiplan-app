@@ -1286,3 +1286,9 @@ h3 {
   line-height: 1.4;
   white-space: normal;
 }
+
+/* While the menu is open the whole button stays in its hover look, so both parts let go together. */
+.split--live:not([data-chosen="mac"]):has(.split-more[aria-expanded="true"]) .button {
+  border-color: var(--blue-dark);
+  background: var(--blue-dark);
+}
